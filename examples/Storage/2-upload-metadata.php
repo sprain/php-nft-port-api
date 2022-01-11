@@ -13,7 +13,7 @@ $response = (new UploadMetadataRequest(
     $apiKey,
    'Test NFT',
     'This is some test NFT, going to the eternal storage of the blockchain',
-    'https://ipfs.io/ipfs/bafkreif4ncyi6ee7ntxoxn6qkkvzlr7frd5p6m366kih5lon6ymski2gxu', // See example/Storage/1-upload-file.php
+    'https://ipfs.io/ipfs/bafkreif4ncyi6ee7ntxoxn6qkkvzlr7frd5p6m366kih5lon6ymski2gxu', // See examples/Storage/1-upload-file.php
     null,
     null,
     [

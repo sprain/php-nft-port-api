@@ -15,8 +15,8 @@ composer require sprain/nftport-api-client
 ## Getting started
 
 1. [Sign up](https://www.nftport.xyz/sign-up) to get an API key for NFTPort.
-2. `cp example/credentials.dist.php example/credentials.php`
-3. Set your api key in `example/credentials.php`
+2. `cp examples/credentials.dist.php examples/credentials.php`
+3. Set your api key in `examples/credentials.php`
 4. Check out examples
 
 ## Versioning

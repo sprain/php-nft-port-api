@@ -4,5 +4,5 @@
 /.DS_Store
 /.phpunit.result.cache
 .DS_Store
-/example/credentials.php
+/examples/credentials.php
 /.php-cs-fixer.cache

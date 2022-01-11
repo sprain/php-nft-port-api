@@ -12,7 +12,7 @@ require_once __DIR__ . '/../credentials.php';
 
 $response = (new RetrieveContractRequest(
     $apiKey,
-    $contractTransactionHash, // see example/Contracts/1-deploy-contract.php
+    $contractTransactionHash, // see examples/Contracts/1-deploy-contract.php
     Blockchain::Polygon->name(),
 ))->execute();
 

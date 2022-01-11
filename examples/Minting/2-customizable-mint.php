@@ -13,8 +13,8 @@ require_once __DIR__ . '/../credentials.php';
 $response = (new CustomizableMintRequest(
     $apiKey,
     Blockchain::Polygon->name(),
-    $contractAddress, // See example/Contracts/2-retrieve-contract.php
-    'ipfs://bafkreidhf4ueqwsrjrgc27j4afbtzmqojelk2rdmlrhxsdnmrbkjxzgfum', // See example/Storage/2-upload-metadata.php
+    $contractAddress, // See examples/Contracts/2-retrieve-contract.php
+    'ipfs://bafkreidhf4ueqwsrjrgc27j4afbtzmqojelk2rdmlrhxsdnmrbkjxzgfum', // See examples/Storage/2-upload-metadata.php
     $ethAddress
 ))->execute();
 

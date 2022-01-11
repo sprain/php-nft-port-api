@@ -25,7 +25,7 @@ class UploadFileRequestTest extends CommonRequestTest
     {
         return new UploadFileRequest(
             'apiKey',
-            __DIR__ . '/../../../../../example/testimage.jpg'
+            __DIR__ . '/../../../../../examples/testimage.jpg'
         );
     }
 }
