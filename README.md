@@ -1,6 +1,6 @@
 # PhpNftPortApi
 
-[![tests](https://github.com/sprain/PhpNftPortApi/actions/workflows/tests.yml/badge.svg)](https://github.com/sprain/PhpNftPortApi/actions/workflows/tests.yml)
+[![tests](https://github.com/sprain/PhpNftPortApi/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/sprain/PhpNftPortApi/actions/workflows/tests.yml)
 
 A php library to use the API of [nftport.xyz](https://www.nftport.xyz).
 
@@ -14,16 +14,11 @@ composer require sprain/nftport-api-client
 
 ## Getting started
 
-1. [Sign up](https://www.nftport.xyz/sign-up) to get an API key for NFTPort.
+1. [Sign up](https://www.nftport.xyz/sign-up) to get an API key for NFTPort
 2. `cp examples/credentials.dist.php examples/credentials.php`
 3. Set your api key in `examples/credentials.php`
 4. Check out examples
 
-## Versioning
-
-[Semantic versioning](https://semver.org/) is used for this library.
-
-In addition, a minor version will always be published if any visible change in the output of the qr code or the payment part takes place, even if it could be considered to be just a bugfix.
 
 ## Getting help
 
