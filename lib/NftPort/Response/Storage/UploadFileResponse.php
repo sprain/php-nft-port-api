@@ -10,7 +10,7 @@ use Sprain\NftPort\Response\ResponseInterface;
 class UploadFileResponse implements ResponseInterface
 {
     #[SerializedName('response')]
-    public string $response;
+    public ?string $response = null;
 
     #[SerializedName('ipfs_url')]
     public ?string $ipfsUrl;

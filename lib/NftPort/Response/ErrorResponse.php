@@ -10,9 +10,9 @@ use JMS\Serializer\Annotation\Type;
 class ErrorResponse implements ResponseInterface
 {
     #[SerializedName('error')]
-    public string $error;
+    public ?string $error = null;
 
     #[SerializedName('detail')]
     #[Type('array')]
-    public array $detail;
+    public ?array $detail = null;
 }

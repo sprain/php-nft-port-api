@@ -8,14 +8,14 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use Sprain\NftPort\Request\Request;
 use Sprain\NftPort\Request\RequestCommonsTrait;
-use Sprain\NftPort\Response\Minting\EasyMintResponse;
+use Sprain\NftPort\Response\Contracts\DeployContractResponse;
 
 class DeployContractRequest extends Request
 {
     use RequestCommonsTrait;
 
     public const API_PATH = '/contracts';
-    public const RESPONSE_CLASS = EasyMintResponse::class;
+    public const RESPONSE_CLASS = DeployContractResponse::class;
     public const HTTP_METHOD = self::HTTP_METHOD_POST;
 
     public function __construct(

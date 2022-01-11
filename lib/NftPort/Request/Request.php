@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Sprain\NftPort\Request;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use JMS\Serializer\Annotation\Exclude;
@@ -27,6 +26,9 @@ abstract class Request
     abstract public function getApiPath(): string;
     abstract public function getResponseClass(): string;
     abstract public function getHttpMethod(): string;
+
+    #[Exclude]
+    private ?Client $client = null;
 
     public function __construct(
         #[Exclude]
@@ -59,6 +61,11 @@ abstract class Request
             $this->getResponseClass(),
             'json'
         );
+    }
+
+    public function setClient(Client $client): void
+    {
+        $this->client = $client;
     }
 
     private function getHttpResponse(): HttpResponseInterface
@@ -184,13 +191,11 @@ abstract class Request
 
     private function getSerializer(): SerializerInterface
     {
-        AnnotationRegistry::registerLoader('class_exists');
-
         return SerializerBuilder::create()->build();
     }
 
     private function getClient(): Client
     {
-        return new Client();
+        return $this->client ?? new Client();
     }
 }

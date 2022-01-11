@@ -10,7 +10,7 @@ use Sprain\NftPort\Response\ResponseInterface;
 class RetrieveContractResponse implements ResponseInterface
 {
     #[SerializedName('response')]
-    public string $response;
+    public ?string $response = null;
 
     #[SerializedName('chain')]
     public ?string $chain;

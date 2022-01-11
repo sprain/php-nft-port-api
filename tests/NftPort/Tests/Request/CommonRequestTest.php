@@ -1,64 +1,63 @@
 <?php declare(strict_types=1);
 
-namespace Sprain\ApiClient\Tests\Request;
+namespace Sprain\NftPort\Tests\Request;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use JMS\Serializer\SerializerBuilder;
+use GuzzleHttp\Psr7\Utils as GuzzleUtils;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sprain\ApiClient\Request\Request;
-use Sprain\ApiClient\Response\ErrorResponse;
-use Sprain\ApiClient\Response\ResponseInterface;
+use Sprain\NftPort\Request\Request;
+use Sprain\NftPort\Response\ErrorResponse;
+use Sprain\NftPort\Response\ResponseInterface;
 
 abstract class CommonRequestTest extends TestCase
 {
     private bool $successful;
     private ?string $successfulResponseClass;
 
-    public function doTestErrorResponse(string $requestClass): void
+    abstract protected function getRequest(): Request;
+
+    public function doTestErrorResponse(): void
     {
         $this->successful = false;
         $this->successfulResponseClass = null;
-        $response = $this->executeRequest($requestClass);
+        $response = $this->executeRequest();
 
         $this->assertInstanceOf(ErrorResponse::class, $response);
     }
 
-    public function doTestSuccessfulResponse(string $requestClass, string $responseClass): void
+    public function doTestSuccessfulResponse(string $responseClass): void
     {
         $this->successful = true;
         $this->successfulResponseClass = $responseClass;
-        $response = $this->executeRequest($requestClass);
+        $response = $this->executeRequest();
 
         $this->assertInstanceOf($responseClass, $response);
     }
 
-    private function executeRequest(string $requestClass): ResponseInterface
+    private function executeRequest(): ResponseInterface
     {
-        $initializer = new $requestClass(
-            'apiKey',
-            'apiSecret',
-            false,
-            $this->getClientMock($requestClass::HTTP_METHOD)
+        $request = $this->getRequest();
+        $request->setClient(
+            $this->getClientMock($request->getHttpMethod())
         );
 
-        return $initializer->execute();
+        return $request->execute();
     }
 
     private function getClientMock(string $methodName): MockObject
     {
-        $browser = $this->getMockBuilder(Client::class)
+        $client = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
             ->onlyMethods([$methodName])
             ->getMock();
 
-        $browser->expects($this->once())
+        $client->expects($this->once())
             ->method($methodName)
             ->willReturn($this->getResponseMock($methodName));
 
-        return $browser;
+        return $client;
     }
 
     private function getResponseMock(string $methodName): MockObject
@@ -71,17 +70,9 @@ abstract class CommonRequestTest extends TestCase
             ])
             ->getMock();
 
-        $expectedResponseCode = 200;
-        if (Request::HTTP_METHOD_POST === $methodName) {
-            $expectedResponseCode = 201;
-        }
-        if (Request::HTTP_METHOD_DELETE === $methodName) {
-            $expectedResponseCode = 204;
-        }
-
         $response
             ->method('getStatusCode')
-            ->willReturn($this->successful ? $expectedResponseCode : 404);
+            ->willReturn($this->successful ? 200 : 422);
 
         if ($this->successful) {
             $content = $this->getFakedApiResponse($this->successfulResponseClass);
@@ -91,18 +82,16 @@ abstract class CommonRequestTest extends TestCase
 
         $response
             ->method('getBody')
-            ->willReturn($content);
+            ->willReturn(GuzzleUtils::streamFor($content));
 
         return $response;
     }
 
     private function getFakedApiResponse(string $class): string
     {
-        AnnotationRegistry::registerLoader('class_exists');
-        $serializer = SerializerBuilder::create()->build();
-
         $response = new $class();
 
-        return $serializer->serialize($response, 'json');
+        // simplified serizalizing
+        return json_encode($response);
     }
 }

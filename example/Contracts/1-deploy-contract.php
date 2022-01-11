@@ -11,8 +11,8 @@ require_once __DIR__ . '/../credentials.php';
 // https://docs.nftport.xyz/docs/nftport/b3A6MjE0MDYzNzU-deploy-an-nft-contract
 
 $response = (new DeployContractRequest(
+    $apiKey,
     Blockchain::Polygon->name(),
-    'polygon',
     'My NFT collection',
     'MYNFT',
     $ethAddress

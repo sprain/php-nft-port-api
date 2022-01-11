@@ -11,7 +11,7 @@ use Sprain\NftPort\Response\ResponseInterface;
 class UploadMetadataResponse implements ResponseInterface
 {
     #[SerializedName('response')]
-    public string $response;
+    public ?string $response = null;
 
     #[SerializedName('metadata_uri')]
     public ?string $metadataUri;
