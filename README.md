@@ -1,4 +1,4 @@
-# Api Client PHP Base
+# PhpNftPortApi
 
 [![tests](https://github.com/sprain/PhpNftPortApi/actions/workflows/tests.yml/badge.svg)](https://github.com/sprain/PhpNftPortApi/actions/workflows/tests.yml)
 
