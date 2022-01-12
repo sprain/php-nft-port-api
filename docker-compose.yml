@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  php:
-    container_name: api-client
-    build: docker/php
-    volumes:
-      - .:/var/www/html
