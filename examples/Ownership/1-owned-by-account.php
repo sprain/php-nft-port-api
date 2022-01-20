@@ -12,7 +12,7 @@ require_once __DIR__ . '/../credentials.php';
 
 $response = (new RetrieveOwnedByAccountRequest(
     $apiKey,
-    $ethAddress,
+    '0x0841c4dcFe6C3D55F3f093cc19D3a2c5e42D2c1e',
     Blockchain::Polygon->name(),
 ))->execute();
 
