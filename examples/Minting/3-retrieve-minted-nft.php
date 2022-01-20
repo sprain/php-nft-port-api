@@ -12,7 +12,7 @@ require_once __DIR__ . '/../credentials.php';
 
 $response = (new RetrieveMintedNftRequest(
     $apiKey,
-    '0x1a3dfdec04379f3aec147afcbc4548e91ce5e159f7d7aa5d22218097ecaff09c',  // See examples/Contracts/2-customizable-mint.php
+    $transactionHash,  // See examples/Contracts/2-customizable-mint.php
     Blockchain::Polygon->name()
 ))->execute();
 
